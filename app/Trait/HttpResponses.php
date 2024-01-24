@@ -2,7 +2,7 @@
 
 namespace App\Trait;
 
-trait HttpResponse {
+trait HttpResponses {
     protected function success($data, $message = null, $statusCode = 200) {
         return response()->json([
             "status" => "OK!",

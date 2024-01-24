@@ -43,3 +43,21 @@ trait HttpResponse {
     }
 }
 ```
+
+4. Membuat controller
+
+Sekarang kita bikin controller `AuthController` dengan command `php artisan make:controller AuthController`, dan menggunakan trait `HttpResponses` didalam controller tersebut.
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Trait\HttpResponses; // use trait
+use Illuminate\Http\Request;
+
+class AuthController extends Controller
+{
+    use HttpResponses; // use trait
+}
+```
