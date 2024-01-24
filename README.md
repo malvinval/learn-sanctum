@@ -61,3 +61,7 @@ class AuthController extends Controller
     use HttpResponses; // use trait
 }
 ```
+
+5. Setup Postman
+
+Silahkan setup Postman sendiri ya. Bikin workspace, collection, dan lain-lainnya.
