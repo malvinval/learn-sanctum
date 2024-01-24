@@ -16,7 +16,7 @@ Idealnya, API akan memberikan response kepada tiap request yang diterima. Kita b
 
 1. Buat folder bernama `Trait` dalam folder `app` project Laravel
 2. Buat file bernama `HttpResponses.php` (nama file bebas)
-3. Buat kode dibawah ini:
+3. Coding trait:
 
 ```php
 <?php
