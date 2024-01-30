@@ -110,4 +110,13 @@ class AuthController extends Controller
 
 Note: `$this` mengacu pada class `AuthController`. `success()` adalah method yang kita gunakan dari trait `HttpResponses`.
 
+# Membuat Controller Task
+
+Sebenernya ini bebas sih, ga harus `TaskController`. Dalam contoh ini, `TaskController` adalah sebuah resource.
+Jalankan command `php artisan make:controller TaskController -r`. Kemudian buat routenya di file `routes/api.php`:
+
+```php
+Route::resource("/tasks", TaskController::class);
+```
+
 # Implementasi API Register
