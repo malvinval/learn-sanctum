@@ -65,3 +65,23 @@ class AuthController extends Controller
 5. Setup Postman
 
 Silahkan setup Postman sendiri ya. Bikin workspace, collection, dan lain-lainnya.
+
+6. Routing
+
+Ketika membuat API di Laravel, idealnya kita routing didalam file `routes/api.php`. Nantinya setiap route yang merupakan bagian dari API, akan memiliki prefix `/api`. Misal ada route login maka endpointnya adalah `/api/login`.
+
+Silahkan buka file `routes/api.php`, dan kita buat 1 route POST:
+
+```php
+Route::post("/login", [AuthController::class, "login"]);
+```
+
+Dari kode diatas, pahami bahwa kita akan menggunakan method `login` dalam controller `AuthController`. Kita tidak perlu menuliskan prefix `/api` sebagai endpoint karena sudah otomatis dilakukan.
+
+7. Jalankan Server
+
+Jalankan command `php artisan serve`.
+
+8. Testing via Postman
+
+Silahkan send POST request melalui Postman ke address server Laravel. Ingat, endpointnya diawali dengan `/api`.

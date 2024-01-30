@@ -8,4 +8,8 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     use HttpResponses; // use trait
+
+    public function login() {
+        return "ok";
+    }
 }
