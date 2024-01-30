@@ -44,7 +44,7 @@ trait HttpResponse {
 }
 ```
 
-4. Membuat controller
+# Membuat controller
 
 Sekarang kita bikin controller `AuthController` dengan command `php artisan make:controller AuthController`, dan menggunakan trait `HttpResponses` didalam controller tersebut.
 
@@ -62,11 +62,11 @@ class AuthController extends Controller
 }
 ```
 
-5. Setup Postman
+# Setup Postman
 
 Silahkan setup Postman sendiri ya. Bikin workspace, collection, dan lain-lainnya.
 
-6. Routing
+# Routing
 
 Ketika membuat API di Laravel, idealnya kita routing didalam file `routes/api.php`. Nantinya setiap route yang merupakan bagian dari API, akan memiliki prefix `/api`. Misal ada route login maka endpointnya adalah `/api/login`.
 
@@ -78,15 +78,15 @@ Route::post("/login", [AuthController::class, "login"]);
 
 Dari kode diatas, pahami bahwa kita akan menggunakan method `login` dalam controller `AuthController`. Kita tidak perlu menuliskan prefix `/api` sebagai endpoint karena sudah otomatis dilakukan.
 
-7. Jalankan Server
+# Jalankan Server
 
 Jalankan command `php artisan serve`.
 
-8. Testing via Postman
+# Testing via Postman
 
 Silahkan send POST request melalui Postman ke address server Laravel. Ingat, endpointnya diawali dengan `/api`.
 
-9. Membuat Response dari Controller
+# Membuat Response dari Controller
 
 Sebelumnya, kita sudah membuat trait sebagai response dari API kita. Gunakan trait tersebut dalam controller kita. Berikut contohnya:
 
@@ -109,3 +109,5 @@ class AuthController extends Controller
 ```
 
 Note: `$this` mengacu pada class `AuthController`. `success()` adalah method yang kita gunakan dari trait `HttpResponses`.
+
+# Implementasi API Register

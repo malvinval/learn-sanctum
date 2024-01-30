@@ -18,4 +18,10 @@ class AuthController extends Controller
             "id" => 1
         ], "REGISTER BERHASIL", 200);
     }
+
+    public function logout() {
+        return $this->success([
+            "id" => 1
+        ], "LOGOUT BERHASIL", 200);
+    }
 }
