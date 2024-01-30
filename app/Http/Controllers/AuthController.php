@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Trait\HttpResponses; // use trait
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -13,8 +13,10 @@ class AuthController extends Controller
         return "ok";
     }
 
-    public function register() {
-        
+    public function register(StoreUserRequest $request) {
+        $request->validated($request->all());
+
+        // ...
     }
 
     public function logout() {

@@ -123,7 +123,7 @@ Route::resource("/tasks", TaskController::class);
 
 1. Kita buat sebuah Request dengan menjalankan command `php artisan make:request StoreUserRequest`. Maka akan dibuatkan sebuah folder bernama `Requests` dalam folder `app/Http`, dan seluruh file Request akan disimpan dalam folder `Requests` tersebut.
 
-2. Apa gunanya file tersebut? Untuk validasi request yang diberikan user. Implementasikan kodenya dalam method `rules()`:
+2. Apa gunanya file tersebut? Untuk membuat rules (aturan) validasi request yang diberikan user. Implementasikan kodenya dalam method `rules()`:
 
 ```php
 namespace App\Http\Requests;
@@ -143,5 +143,15 @@ class StoreUserRequest extends FormRequest
             "password" => ["required", "confirmed", Password::defaults()],
         ];
     }
+}
+```
+
+3. Lakukan validasi di method `register()` dalam `AuthController`:
+
+```php
+public function register(StoreUserRequest $request) {
+    $request->validated($request->all());
+
+    // ...
 }
 ```
