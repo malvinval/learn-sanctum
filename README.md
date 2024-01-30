@@ -120,3 +120,28 @@ Route::resource("/tasks", TaskController::class);
 ```
 
 # Implementasi API Register
+
+1. Kita buat sebuah Request dengan menjalankan command `php artisan make:request StoreUserRequest`. Maka akan dibuatkan sebuah folder bernama `Requests` dalam folder `app/Http`, dan seluruh file Request akan disimpan dalam folder `Requests` tersebut.
+
+2. Apa gunanya file tersebut? Untuk validasi request yang diberikan user. Implementasikan kodenya dalam method `rules()`:
+
+```php
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
+
+class StoreUserRequest extends FormRequest
+{
+    /// ... ///
+
+    public function rules(): array
+    {
+        return [
+            "name" => ["required", "string", "max:255"],
+            "email" => ["required", "string", "max:255", "unique:users"],
+            "password" => ["required", "confirmed", Password::defaults()],
+        ];
+    }
+}
+```

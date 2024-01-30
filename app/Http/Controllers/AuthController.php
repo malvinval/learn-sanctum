@@ -14,9 +14,7 @@ class AuthController extends Controller
     }
 
     public function register() {
-        return $this->success([
-            "id" => 1
-        ], "REGISTER BERHASIL", 200);
+        
     }
 
     public function logout() {
