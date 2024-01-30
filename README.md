@@ -133,7 +133,10 @@ use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
 {
-    /// ... ///
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     public function rules(): array
     {
@@ -146,6 +149,8 @@ class StoreUserRequest extends FormRequest
 }
 ```
 
+Note: **Jangan lupa return `true` dalam method `authorize()`**
+
 3. Lakukan validasi di method `register()` dalam `AuthController`:
 
 ```php
@@ -155,3 +160,67 @@ public function register(StoreUserRequest $request) {
     // ...
 }
 ```
+
+4. Setelah validasi berhasil, create data kedalam database sekaligus membuatkan token untuk user yang terdaftar. Token tersebut nantinya juga akan disertakan dalam response API kita.
+
+```php
+public function register(StoreUserRequest $request) {
+    $request->validated($request->all());
+
+    $user = User::create([
+        "name" => $request->name,
+        "email" => $request->email,
+        "password" => Hash::make($request->password)
+    ]);
+
+    return $this->success([
+        "user" => $user,
+        "token" => $user->createToken("API Token of " . $user->name)->plainTextToken
+    ], "Registered!", 200);
+}
+```
+
+Note: `createToken()` berguna untuk generate token kepada user, dan properti `plainTextToken` berguna untuk memberikan plain token dalam API response, bukan dalam bentuk hashed token.
+
+Note: Argumen dalam method `createToken` dibutuhkan untuk memberikan nama token dalam database.
+
+5. Testing Request API via Postman
+
+Gunakan kedua request header berikut:
+
+`Accept`: `application/json`
+`Content-Type`: `application/json`
+
+Selain itu, kirimkan data `name`, `email`, `password`, dan `password_confirmation` melalui request body raw.
+
+```
+{
+    "name": "Malvin Valerian",
+    "email": "malvin@gmail.com",
+    "password": "12345678",
+    "password_confirmation": "12345678"
+}
+```
+
+`password_confirmation` digunakan karena kita menggunakan rules `Password::defaults()`.
+
+Setelah berhasil melakukan request via Postman, API kita akan memberikan response:
+
+```
+{
+    "status": "OK!",
+    "message": "Registered!",
+    "data": {
+        "user": {
+            "name": "Malvin Valerian",
+            "email": "malvinval@gmail.com",
+            "updated_at": "2024-01-30T16:03:31.000000Z",
+            "created_at": "2024-01-30T16:03:31.000000Z",
+            "id": 1
+        },
+        "token": "1|JCozWksb2U0bGv5Ufizl7GEJtEFZ4r2lmTFcPrHz5ff9af85"
+    }
+}
+```
+
+Token dari user tersebut akan disimpan dalam table `personal_access_tokens` di database kita.
