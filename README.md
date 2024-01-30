@@ -189,6 +189,7 @@ Note: Argumen dalam method `createToken` dibutuhkan untuk memberikan nama token 
 Gunakan kedua request header berikut:
 
 `Accept`: `application/json`
+
 `Content-Type`: `application/json`
 
 Selain itu, kirimkan data `name`, `email`, `password`, dan `password_confirmation` melalui request body raw.
