@@ -85,3 +85,27 @@ Jalankan command `php artisan serve`.
 8. Testing via Postman
 
 Silahkan send POST request melalui Postman ke address server Laravel. Ingat, endpointnya diawali dengan `/api`.
+
+9. Membuat Response dari Controller
+
+Sebelumnya, kita sudah membuat trait sebagai response dari API kita. Gunakan trait tersebut dalam controller kita. Berikut contohnya:
+
+```php
+namespace App\Http\Controllers;
+
+use App\Trait\HttpResponses; // use trait
+use Illuminate\Http\Request;
+
+class AuthController extends Controller
+{
+    use HttpResponses; // use trait
+
+    public function register() {
+        return $this->success([
+            "id" => 1
+        ], "REGISTER BERHASIL", 200);
+    }
+}
+```
+
+Note: `$this` mengacu pada class `AuthController`. `success()` adalah method yang kita gunakan dari trait `HttpResponses`.
